@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+//actions
+import {addAction} from '../../app/redux/actions/user_action';
 //components
 import Lista from '../components/lista';
 
@@ -10,17 +13,27 @@ class ListaContainer extends Component {
         super(props);
     }
 
-    render() {
-        let lista = [
-            { nombre: 'pepe', correo: 'pepe@gmail.com' },
-            { nombre: 'juan', correo: 'juan@gmail.com' },
-            { nombre: 'vanessa', correo: 'vanessa@gmail.com' }
-        ];
-
-        return (
-            <Lista lista={lista} />
+    _view(){
+        return(
+            <div className="ma4">
+                <Lista lista={this.props._usuarios} />
+            </div>
         )
     }
-}
 
-export default withRouter(ListaContainer);
+    render() {
+        return (
+            <div>                                 
+                {this._view()}
+            </div>
+        )
+    }
+};
+
+let mapStateToProps = (state) => {
+    return {
+        _usuarios: state.UserStore
+    }
+};
+
+export default withRouter(connect(mapStateToProps, null)(ListaContainer));

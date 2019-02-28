@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 
 function TagLI(props) {
     return (
-        <li key={props.key}>
+        <li>
             <p>
                 <label>
                     nombre:
@@ -48,11 +49,15 @@ class Lista extends Component {
     render() {
         return (
             <div>
-               {this._lista()} 
+                {this._lista()}
             </div>
         )
     }
 
 }
+
+Lista.propTypes = {
+    lista: PropTypes.array.isRequired
+};
 
 export default Lista;
